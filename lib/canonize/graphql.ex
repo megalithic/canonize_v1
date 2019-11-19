@@ -16,12 +16,21 @@ defmodule Canonize.Graphql do
   def get(url, query) do
     {:ok, authorization} = authentication("token")
 
-    Neuron.query(
-      query,
-      %{},
-      url: url,
-      headers: [authorization: authorization]
-    )
+    case Neuron.query(
+           query,
+           %{},
+           url: url,
+           headers: [authorization: authorization]
+         ) do
+      {:ok, %Neuron.Response{body: %{"data" => data}, status_code: 200, headers: []}} ->
+        {:ok, data}
+
+      {:error, error} ->
+        {:error, "There was an error getting data from the server (GQL): \r\n#{inspect(error)}"}
+
+      _ ->
+        {:error, "There was an unkonwn error getting data from the server (GQL).."}
+    end
   end
 
   @spec post(String.t(), String.t(), Map.t()) :: {:ok, term} | {:error, term}
