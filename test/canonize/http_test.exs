@@ -13,7 +13,7 @@ defmodule Canonize.HttpTest do
 
   describe "get/2" do
     test "returns a valid HTTP response" do
-      assert Http.get("foo", "/bar") == {:ok, "yay"}
+      assert Http.get("https://api.github.com", "") == {:ok, "yay"}
     end
 
     test "returns an error if an invalid url is given" do

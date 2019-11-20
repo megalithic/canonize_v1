@@ -33,7 +33,7 @@ defmodule Canonize.Http do
   end
 
   defp connection(url, endpoint, auth) do
-    case Mint.HTTP.connect(:https, url, 80) do
+    case Mint.HTTP.connect(:https, url, 443, transport_opts: [timeout: 3_000]) do
       {:ok, conn} ->
         Mint.HTTP.request(conn, "GET", endpoint, [{"authorization", auth}], "")
 
