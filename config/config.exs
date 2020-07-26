@@ -15,7 +15,7 @@ config :canonize, CanonizeWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "/3QUjbxK2FHfp089rNzIspSKGDRbjK53pxMC04urAfPB55fyetYAe4KWOKi8Z8BF",
   render_errors: [view: CanonizeWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Canonize.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: Canonize.PubSub
 
 # Configures Elixir's Logger
 config :logger, :console,

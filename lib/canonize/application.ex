@@ -11,7 +11,8 @@ defmodule Canonize.Application do
       # Start the Ecto repository
       Canonize.Repo,
       # Start the endpoint when the application starts
-      CanonizeWeb.Endpoint
+      CanonizeWeb.Endpoint,
+      {Phoenix.PubSub, [name: Canonize.PubSub, adapter: Phoenix.PubSub.PG2]}
       # Starts a worker by calling: Canonize.Worker.start_link(arg)
       # {Canonize.Worker, arg},
     ]
