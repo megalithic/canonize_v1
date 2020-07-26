@@ -60,7 +60,7 @@ config :canonize, CanonizeWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/canonize_web/{live,views}/.*(ex)$",
+      ~r"lib/canonize_web/(live|views)/.*(ex)$",
       ~r"lib/canonize_web/templates/.*(eex)$"
     ]
   ]

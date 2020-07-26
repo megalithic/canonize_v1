@@ -13,9 +13,10 @@ config :canonize,
 # Configures the endpoint
 config :canonize, CanonizeWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "/3QUjbxK2FHfp089rNzIspSKGDRbjK53pxMC04urAfPB55fyetYAe4KWOKi8Z8BF",
-  render_errors: [view: CanonizeWeb.ErrorView, accepts: ~w(html json)],
-  pubsub_server: Canonize.PubSub
+  secret_key_base: "3tQh4PHHFySOiZ6cAwtFrVJSV5IfAm0MHSx5tjFyp/RWcqWffgk0fO76u79yL3tk",
+  render_errors: [view: CanonizeWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Canonize.PubSub,
+  live_view: [signing_salt: "NIArdp0E"]
 
 # Configures Elixir's Logger
 config :logger, :console,

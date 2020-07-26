@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+set -o errexit -o errtrace
+
+cd "$(dirname "${BASH_SOURCE[0]}")/.."
+
+mix phx.server

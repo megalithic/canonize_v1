@@ -12,7 +12,7 @@ defmodule CanonizeWeb.ConnCase do
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
   by setting `use CanonizeWeb.ConnCase, async: true`, although
-  this option is not recommendded for other databases.
+  this option is not recommended for other databases.
   """
 
   use ExUnit.CaseTemplate
@@ -20,7 +20,10 @@ defmodule CanonizeWeb.ConnCase do
   using do
     quote do
       # Import conveniences for testing with connections
-      use Phoenix.ConnTest
+      import Plug.Conn
+      import Phoenix.ConnTest
+      import CanonizeWeb.ConnCase
+
       alias CanonizeWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing

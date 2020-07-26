@@ -6,15 +6,17 @@ defmodule Canonize.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
     children = [
       # Start the Ecto repository
       Canonize.Repo,
-      # Start the endpoint when the application starts
-      CanonizeWeb.Endpoint,
-      {Phoenix.PubSub, [name: Canonize.PubSub, adapter: Phoenix.PubSub.PG2]}
-      # Starts a worker by calling: Canonize.Worker.start_link(arg)
-      # {Canonize.Worker, arg},
+      # Start the Telemetry supervisor
+      CanonizeWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Canonize.PubSub},
+      # Start the Endpoint (http/https)
+      CanonizeWeb.Endpoint
+      # Start a worker by calling: Canonize.Worker.start_link(arg)
+      # {Canonize.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
