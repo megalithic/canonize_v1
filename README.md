@@ -8,9 +8,15 @@ Taking your various social media bookmarks and favorites and aggregating them in
 - [ ] Instagram (saved)
   * https://www.instagram.com/developer/clients/manage/
 - [ ] Twitter (liked)
+  * https://developer.twitter.com/en/docs/api-reference-index
+    * https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
+    * https://api.twitter.com/1.1/favorites/list.json?count=200&screen_name=megalithic
+  * `{TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET}`
 - [ ] Facebook (saved)
 - [ ] Slack (starred)
 - [ ] Reddit (saved)
+  * https://www.reddit.com/dev/api
+    * https://www.reddit.com/dev/api#POST_api_save
 - [ ] GitHub (starred)
 - [ ] YouTube (watch later)
 - [ ] Gmail (starred)
@@ -35,11 +41,16 @@ Taking your various social media bookmarks and favorites and aggregating them in
 * Postgres
 * GraphQL
 
+#### TODO
+
+- Switch to `gun` from `mint` for http things? More focus on
+  concurrence/processes than stateless http client instances.
 
 #### Additional Info
 
 - https://github.com/APIs-guru/graphql-apis
 
+---
 
 #### Default Phoenix things
 
