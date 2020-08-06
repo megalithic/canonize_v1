@@ -10,14 +10,14 @@ Taking your various social media bookmarks and favorites and aggregating them in
 - [ ] Twitter (liked)
   * https://developer.twitter.com/en/docs/api-reference-index
     * https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-favorites-list
-    * https://api.twitter.com/1.1/favorites/list.json?count=200&screen_name=megalithic
+    * https://api.twitter.com/1.1/favorites/list.json?count=200&screen_name=<username>
   * `{TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET}`
 - [ ] Facebook (saved)
 - [ ] Slack (starred)
 - [ ] Reddit (saved)
   * https://www.reddit.com/dev/api
     * https://www.reddit.com/dev/api#POST_api_save
-    * https://www.reddit.com/user/defsquad/saved.json (??)
+    * https://www.reddit.com/user/<username>/saved.json (??)
     * https://github.com/reddit-archive/reddit/wiki/OAuth2 (auth)
 - [ ] GitHub (starred)
 - [ ] YouTube (watch later)
