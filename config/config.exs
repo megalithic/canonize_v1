@@ -18,6 +18,16 @@ config :canonize, CanonizeWeb.Endpoint,
   pubsub_server: Canonize.PubSub,
   live_view: [signing_salt: "NIArdp0E"]
 
+config :canonize, :services,
+  reddit: %{url: "https://www.reddit.com", client_id: "", client_secret: "", redirect_uri: ""},
+  twitter: %{url: "https://api.twitter.com", client_id: "", client_secret: ""},
+  github: %{
+    url: "https://api.github.com",
+    client_id: "",
+    client_secret: "",
+    username: "megalithic"
+  }
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

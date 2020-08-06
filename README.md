@@ -17,6 +17,8 @@ Taking your various social media bookmarks and favorites and aggregating them in
 - [ ] Reddit (saved)
   * https://www.reddit.com/dev/api
     * https://www.reddit.com/dev/api#POST_api_save
+    * https://www.reddit.com/user/defsquad/saved.json (??)
+    * https://github.com/reddit-archive/reddit/wiki/OAuth2 (auth)
 - [ ] GitHub (starred)
 - [ ] YouTube (watch later)
 - [ ] Gmail (starred)

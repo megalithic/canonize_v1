@@ -1,6 +1,8 @@
 defmodule CanonizeWeb.PageLive do
   use CanonizeWeb, :live_view
 
+  alias Canonize.Client.Http
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, assign(socket, query: "", results: %{})}

@@ -1,99 +1,81 @@
 defmodule Canonize.Client.Http do
   @moduledoc """
   HTTP client to make RESTful API requests
+
+  Presently, a wrapper around the most excellent Finch.
   """
 
-  @meta %{
-    scheme: :https,
-    host: "api.github.com",
-    port: 443,
-    method: "GET",
-    path: "/zen",
-    headers: []
-  }
+  #   alias Finch.Response
 
-  def init(meta \\ @meta) do
-    {:ok, conn} = connection(meta)
-    {:ok, conn, request_ref} = request(conn, meta)
+  use Agent
 
-    # receive and parse the response
-    receive do
-      message ->
-        # send received message to `Mint` to be parsed
-        {:ok, conn, responses} = Mint.HTTP.stream(conn, message)
+  def init(config, client, pool_size) do
+    Agent.start_link(
+      fn ->
+        %{
+          config: config,
+          client: client,
+          pool_size: pool_size
+        }
+      end,
+      name: __MODULE__
+    )
 
-        for response <- responses do
-          case response do
-            {:status, ^request_ref, status_code} ->
-              IO.puts("> Response status code #{status_code}")
-
-            {:headers, ^request_ref, headers} ->
-              IO.puts("> Response headers: #{inspect(headers)}")
-
-            {:data, ^request_ref, data} ->
-              IO.puts("> Response body")
-              IO.puts(data)
-
-            {:done, ^request_ref} ->
-              IO.puts("> Response fully received")
-          end
-        end
-
-        Mint.HTTP.close(conn)
-    end
+    {Finch,
+     name: client,
+     pools: %{
+       config.url => [size: pool_size]
+     }}
   end
 
-  def connection(%{scheme: scheme, host: host, port: port} = _meta) do
-    # open a new http connection to api.github.com and get a handle to the connection struct
-    {:ok, conn} = Mint.HTTP.connect(_scheme = scheme, _host = host, _port = port)
+  def request(method, path, headers, body) do
+    config =
+      get(:config)
+      |> IO.inspect(label: "get config")
 
-    {:ok, conn}
+    client =
+      get(:client)
+      |> IO.inspect(label: "get client")
+
+    method
+    |> Finch.build("#{config.url}#{path}", headers, body)
+    |> Finch.request(client)
   end
 
-  def request(conn, %{method: method, path: path, headers: headers} = _meta) do
-    {:ok, conn, request_ref} =
-      Mint.HTTP.request(conn, _method = method, _path = path, _headers = headers, _body = nil)
+  def request(method, path, headers) do
+    config =
+      get(:config)
+      |> IO.inspect(label: "get config")
 
-    {:ok, conn, request_ref}
+    client =
+      get(:client)
+      |> IO.inspect(label: "get client")
+
+    method
+    |> Finch.build("#{config.url}#{path}", headers)
+    |> Finch.request(client)
   end
 
-  #   defp recv_response(conn, request_ref, body \\ []) do
-  #   end
+  def request(method, path) do
+    config =
+      get(:config)
+      |> IO.inspect(label: "get config")
 
-  # # receive and parse the response till we get a :done mint response
-  # defp recv_response(conn, request_ref, body \\ []) do
-  #   {conn, body, status} =
-  #     receive do
-  #       message ->
-  # # send received message to `Mint` to be parsed
-  #         {:ok, conn, mint_responses} = Mint.HTTP.stream(conn, message)
+    client =
+      get(:client)
+      |> IO.inspect(label: "get client")
 
-  # # reduce all the mint responses returning a partial body and status
-  #         {body, status} =
-  #           Enum.reduce(mint_responses, {body, :incomplete}, fn mint_response, {body, _status} ->
-  #             case mint_response do
-  # # the :status mint-response doesn't add anything to the body and receiving this
-  # # doesn't signify the end of the response, let's ignore this for now.
-  #               {:status, ^request_ref, _status_code} ->
-  #                 {body, :incomplete}
+    method
+    |> Finch.build("#{config.url}#{path}")
+    |> Finch.request(client)
+  end
 
-  # # the :headers mint-response doesn't add anything to the body and receiving this
-  # # doesn't signify the end of the response, let's ignore this for now.
-  #               {:headers, ^request_ref, _headers} ->
-  #                 {body, :incomplete}
+  defp get(key) do
+    Agent.get(__MODULE__, & &1)
+    |> Map.get(key)
+  end
 
-  # # the :data mint-response returns a partial body, let us append this
-  # # to the end of our accumulator, this still doesn't signify the end
-  # # of our response, so let's continue
-  #               {:data, ^request_ref, data} ->
-  #                 {[ data | body ], :incomplete}
-
-  # # the :done mint-response signifies the end of the response
-  #               {:done, ^request_ref} ->
-  #                 {Enum.reverse(body), :complete}
-  #             end
-  #           end)
-
-  #         {conn, body, status}
-  #     end
+  defp get() do
+    Agent.get(__MODULE__, & &1)
+  end
 end

@@ -14,9 +14,13 @@ defmodule Canonize.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Canonize.PubSub},
       # Start the Endpoint (http/https)
-      CanonizeWeb.Endpoint
+      CanonizeWeb.Endpoint,
       # Start a worker by calling: Canonize.Worker.start_link(arg)
       # {Canonize.Worker, arg}
+
+      # Canonize.Services.Reddit.child_spec(),
+      # Canonize.Services.Twitter.child_spec(),
+      Canonize.Services.Github.child_spec()
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
