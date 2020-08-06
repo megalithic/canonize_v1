@@ -5,8 +5,6 @@ defmodule Canonize.Client.Http do
   Presently, a wrapper around the most excellent Finch.
   """
 
-  #   alias Finch.Response
-
   use Agent
 
   def init(config, client, pool_size) do
@@ -29,13 +27,9 @@ defmodule Canonize.Client.Http do
   end
 
   def request(method, path, headers, body) do
-    config =
-      get(:config)
-      |> IO.inspect(label: "get config")
+    config = get(:config)
 
-    client =
-      get(:client)
-      |> IO.inspect(label: "get client")
+    client = get(:client)
 
     method
     |> Finch.build("#{config.url}#{path}", headers, body)
@@ -43,13 +37,9 @@ defmodule Canonize.Client.Http do
   end
 
   def request(method, path, headers) do
-    config =
-      get(:config)
-      |> IO.inspect(label: "get config")
+    config = get(:config)
 
-    client =
-      get(:client)
-      |> IO.inspect(label: "get client")
+    client = get(:client)
 
     method
     |> Finch.build("#{config.url}#{path}", headers)
@@ -57,13 +47,9 @@ defmodule Canonize.Client.Http do
   end
 
   def request(method, path) do
-    config =
-      get(:config)
-      |> IO.inspect(label: "get config")
+    config = get(:config)
 
-    client =
-      get(:client)
-      |> IO.inspect(label: "get client")
+    client = get(:client)
 
     method
     |> Finch.build("#{config.url}#{path}")
@@ -75,7 +61,7 @@ defmodule Canonize.Client.Http do
     |> Map.get(key)
   end
 
-  defp get() do
-    Agent.get(__MODULE__, & &1)
-  end
+  # defp get() do
+  #   Agent.get(__MODULE__, & &1)
+  # end
 end

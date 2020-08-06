@@ -1,4 +1,4 @@
-## Canon
+## Canonize
 
 Taking your various social media bookmarks and favorites and aggregating them into one searchable, filterable location. Perhaps even support Zapier or IFTTT.
 
@@ -26,7 +26,7 @@ Taking your various social media bookmarks and favorites and aggregating them in
 
 #### Features
 
-- [x] Login via API
+- [ ] Login via API
 - [ ] User-configurable API credentials
 - [ ] Searchable
 - [ ] Filterable
@@ -43,14 +43,14 @@ Taking your various social media bookmarks and favorites and aggregating them in
 * Postgres
 * GraphQL
 
+
 #### TODO
 
-- Switch to `gun` from `mint` for http things? More focus on
-  concurrence/processes than stateless http client instances.
+
 
 #### Additional Info
 
-- https://github.com/APIs-guru/graphql-apis
+-  https://github.com/APIs-guru/graphql-apis
 
 ---
 
