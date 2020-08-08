@@ -52,6 +52,11 @@ Taking your various social media bookmarks and favorites and aggregating them in
 
 -  https://github.com/APIs-guru/graphql-apis
 
+
+##### Notes
+
+- `mix phx.gen.context Models Model models thing1:string thing2:string thing3:boolean thing4:integer`
+
 ---
 
 #### Default Phoenix things
