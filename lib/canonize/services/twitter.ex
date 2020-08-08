@@ -6,7 +6,7 @@ defmodule Canonize.Services.Twitter do
   @config Application.get_env(:canonize, :services)[:twitter]
 
   alias Canonize.Client.Http
-  alias Finch.Response
+  # alias Finch.Response
 
   def pool_size, do: 25
 

@@ -6,7 +6,7 @@ defmodule Canonize.Services.Reddit do
   @config Application.get_env(:canonize, :services)[:reddit]
 
   alias Canonize.Client.Http
-  alias Finch.Response
+  # alias Finch.Response
 
   def pool_size, do: 25
 
