@@ -6,9 +6,22 @@ defmodule Canonize.ServicesTest do
   describe "services" do
     alias Canonize.Services.Service
 
-    @valid_attrs %{name: "some name", server_type_attrs: %{}, url: "some url"}
-    @update_attrs %{name: "some updated name", server_type_attrs: %{}, url: "some updated url"}
-    @invalid_attrs %{name: nil, server_type_attrs: nil, url: nil}
+    @valid_attrs %{
+      name: "some name",
+      service_type_attrs: %{},
+      url: "some url",
+      type: "some type",
+      username: "some username",
+      endpoint: "some endpoint"
+    }
+    @update_attrs %{
+      name: "some updated name",
+      service_type_attrs: %{},
+      url: "some updated url",
+      endpoint: "some updated endpoint",
+      username: "some updated username"
+    }
+    @invalid_attrs %{name: nil, service_type_attrs: nil, url: nil, type: nil}
 
     def service_fixture(attrs \\ %{}) do
       {:ok, service} =
@@ -32,7 +45,7 @@ defmodule Canonize.ServicesTest do
     test "create_service/1 with valid data creates a service" do
       assert {:ok, %Service{} = service} = Services.create_service(@valid_attrs)
       assert service.name == "some name"
-      assert service.server_type_attrs == %{}
+      assert service.service_type_attrs == %{}
       assert service.url == "some url"
     end
 
@@ -44,7 +57,7 @@ defmodule Canonize.ServicesTest do
       service = service_fixture()
       assert {:ok, %Service{} = service} = Services.update_service(service, @update_attrs)
       assert service.name == "some updated name"
-      assert service.server_type_attrs == %{}
+      assert service.service_type_attrs == %{}
       assert service.url == "some updated url"
     end
 
