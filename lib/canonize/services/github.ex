@@ -14,7 +14,7 @@ defmodule Canonize.Services.Github do
     Http.init(@config, __MODULE__, pool_size())
   end
 
-  def get_items() do
+  def get_starred() do
     :get
     |> Http.request("/users/#{@config.username}/starred")
     |> handle_response()

@@ -18,7 +18,7 @@ defmodule Canonize.Services do
 
   """
   def list_services do
-    Repo.all(Service)
+    Repo.all(from s in Service, order_by: [desc: s.id])
   end
 
   @doc """

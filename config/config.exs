@@ -18,6 +18,17 @@ config :canonize, CanonizeWeb.Endpoint,
   pubsub_server: Canonize.PubSub,
   live_view: [signing_salt: "NIArdp0E"]
 
+# :type in services schema
+config :canonize, :supported_services, [
+  :reddit,
+  :github,
+  :twitter,
+  :youtube,
+  :instagram,
+  :facebook,
+  :slack
+]
+
 config :canonize, :services,
   reddit: %{url: "https://www.reddit.com", client_id: "", client_secret: "", redirect_uri: ""},
   twitter: %{url: "https://api.twitter.com", client_id: "", client_secret: ""},

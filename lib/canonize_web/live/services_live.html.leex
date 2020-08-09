@@ -1,0 +1,50 @@
+<h1>Services</h1>
+<div id="services">
+  <%= f = form_for @changeset, "#", phx_submit: "save", phx_change: "validate"  %>
+
+  <div class="field">
+    <%= select f, :type, @service_types, prompt: "Service", selected: :type %>
+  </div>
+
+  <div class="field">
+    <%= text_input f, :name, placeholder: "Name", autocomplete: "off", phx_debounce: "1000" %>
+    <%= error_tag f, :name %>
+  </div>
+
+  <div class="field">
+    <%= text_input f, :url, placeholder: "Url", autocomplete: "off", phx_debounce: "blur" %>
+    <%= error_tag f, :url %>
+  </div>
+
+  <div class="field">
+    <%= text_input f, :endpoint, placeholder: "Endpoint", autocomplete: "off", phx_debounce: "blur" %>
+    <%= error_tag f, :endpoint %>
+  </div>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+  </form>
+
+  <div id="services-list" phx-update="prepend">
+    <%= for service <- @services do %>
+      <div class="service <%= if service.active, do: "active" %>" id="<%= service.id %>">
+        <div class="name">
+          <%= service.name %>
+        </div>
+        <div class="url">
+          <img src="images/url.svg">
+          <%= service.url %>
+        </div>
+        <div class="active">
+          <%= if service.active do %>
+            <img src="/images/check-circle.svg">
+            Active
+          <% else %>
+            <button>
+              Edit
+            </button>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

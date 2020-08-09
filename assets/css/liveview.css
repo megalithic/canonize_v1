@@ -1,17 +1,3 @@
-@import "./phoenix.css";
-@import "../node_modules/nprogress/nprogress.css";
-
-
-/* -- modules  */
-@import "./modules/services.css";
-
-
-/* -- tailwind-related  */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-
 /* -- liveview-related  */
 .phx-no-feedback.invalid-feedback,
 .phx-no-feedback .invalid-feedback {
